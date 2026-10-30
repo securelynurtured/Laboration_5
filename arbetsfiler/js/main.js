@@ -33,21 +33,42 @@ let history = [];
  * @returns {boolean}
  */
 function validateForm() {
+    // Töm tidigare fel inför en ny kontroll
+    errors = [];
+
     // Kontrollera formulärets obligatoriska fält
+    if (fullnameInput.value.trim() === "") {
+        errors.push("Ange ditt namn.");
+    }
+
+    if (emailInput.value.trim() === "") {
+        errors.push("Ange din e-postadress.");
+    }
+
+    if (phoneInput.value.trim() === "") {
+        errors.push("Ange ditt telefonnummer.");
+    }
 
     // Visa eventuella felmeddelanden
+    displayErrors();
 
-    // Returnera resultatet (true eller false) av valideringen
+    // Formuläret är giltigt om det inte finns några fel
+    return errors.length === 0;
 }
-
 
 /**
  * Visar felmeddelanden på sidan.
  */
 function displayErrors() {
     // Rensa tidigare felmeddelanden
+    errorList.innerHTML = "";
 
     // Skriv ut aktuella felmeddelanden till DOM
+    for (const error of errors) {
+        const liElement = document.createElement("li");
+        liElement.textContent = error;
+        errorList.appendChild(liElement);
+    }
 }
 
 
@@ -134,8 +155,12 @@ function deleteHistory() {
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    createStudentCard();
+    // Skapa bara studentkortet om alla obligatoriska fält är ifyllda
+    if (validateForm()) {
+        createStudentCard();
+    }
 });
+
 // När användaren klickar på "Rensa"
 
 
