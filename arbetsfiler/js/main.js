@@ -56,8 +56,20 @@ function displayErrors() {
  */
 function createStudentCard() {
     // Hämta information från formuläret
+    const fullname = fullnameInput.value.trim();
+    const email = emailInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const font = fontSelect.value;
 
     // Uppdatera studentkortet
+    previewFullname.textContent = fullname;
+    previewEmail.textContent = email;
+    previewPhone.textContent = phone;
+
+    // Använd valt typsnitt för informationen på studentkortet
+    previewFullname.style.fontFamily = font;
+    previewEmail.style.fontFamily = font;
+    previewPhone.style.fontFamily = font;
 
     // Lägg till studentkortet i historiken
 
@@ -122,10 +134,7 @@ function deleteHistory() {
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    console.log(fullnameInput.value.trim());
-    console.log(emailInput.value.trim());
-    console.log(phoneInput.value.trim());
-    console.log(fontSelect.value);
+    createStudentCard();
 });
 // När användaren klickar på "Rensa"
 
