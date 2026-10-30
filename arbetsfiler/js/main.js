@@ -92,17 +92,27 @@ function createStudentCard() {
     previewEmail.style.fontFamily = font;
     previewPhone.style.fontFamily = font;
 
-    // Lägg till studentkortet i historiken
+        // Lägg till studentkortet i historiken
+    const studentCard = {
+        fullname: fullname,
+        email: email,
+        phone: phone,
+        font: font
+    };
+
+    history.unshift(studentCard);
 
     // Spara och uppdatera historiken
+    saveHistory();
+    renderHistory();
 }
-
 
 /**
  * Sparar historiken i localStorage.
  */
 function saveHistory() {
-    // Spara history i localStorage
+    // Omvandla historiken till JSON-text och spara den i webbläsaren
+    localStorage.setItem("studentCards", JSON.stringify(history));
 }
 
 
