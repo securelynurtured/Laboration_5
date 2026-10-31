@@ -115,16 +115,18 @@ function saveHistory() {
     localStorage.setItem("studentCards", JSON.stringify(history));
 }
 
-
 /**
  * Läser in tidigare historik från localStorage.
  */
 function loadHistory() {
-    // Hämta eventuell sparad historik
+    // Hämta eventuell sparad historik som text
+    const savedHistory = localStorage.getItem("studentCards");
 
-    // Uppdatera history
+    // Om sparad historik finns, omvandla texten till en array
+    if (savedHistory !== null) {
+        history = JSON.parse(savedHistory);
+    }
 }
-
 
 /**
  * Visar historiken på sidan.
@@ -204,3 +206,5 @@ form.addEventListener("submit", function (event) {
 
 // När sidan laddas:
 // - läs in och visa eventuell tidigare historik
+loadHistory();
+renderHistory();
