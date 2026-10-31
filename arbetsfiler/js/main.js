@@ -131,8 +131,33 @@ function loadHistory() {
  */
 function renderHistory() {
     // Rensa tidigare visad historik
+    historySection.innerHTML = "";
 
-    // Skriv ut innehållet i history till DOM
+    // Skapa ett element för varje studentkort i historiken
+    for (const studentCard of history) {
+        const article = document.createElement("article");
+
+        // Använd studentkortets sparade typsnitt
+        article.style.fontFamily = studentCard.font;
+
+        // Skapa element för namn, e-post och telefon
+        const name = document.createElement("p");
+        name.textContent = studentCard.fullname;
+
+        const email = document.createElement("p");
+        email.textContent = studentCard.email;
+
+        const phone = document.createElement("p");
+        phone.textContent = studentCard.phone;
+
+        // Lägg informationen i historikposten
+        article.appendChild(name);
+        article.appendChild(email);
+        article.appendChild(phone);
+
+        // Lägg den färdiga historikposten på sidan
+        historySection.appendChild(article);
+    }
 }
 
 
